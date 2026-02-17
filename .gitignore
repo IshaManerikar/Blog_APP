@@ -1,6 +1,8 @@
-appsettings.json
-appsettings.Development.json
+# ASP.NET
 .vs/
-
 **/bin/
 **/obj/
+
+# Config secrets
+appsettings.json
+appsettings.Development.json
