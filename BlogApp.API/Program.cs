@@ -23,7 +23,11 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<CommentService>();
-
+builder.Services.AddScoped<ILikeRepository, LikeRepository > ();
+builder.Services.AddScoped<LikeService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PasswordService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();
