@@ -1,7 +1,9 @@
-﻿using BlogApp.Application.Services;
-using BlogApp.Domain.Entities;
-using BlogApp.Application.DTOs;
+﻿using BlogApp.Application.DTOs;
+using BlogApp.Application.Exceptions;
 using BlogApp.Application.Interfaces;
+using BlogApp.Application.Services;
+using BlogApp.Domain.Entities;
+using BlogApp.Application.Exceptions;
 public class AuthService
 {
     private readonly IUserRepository _repo;
@@ -17,7 +19,7 @@ public class AuthService
     {
         var existing = await _repo.GetByEmailAsync(dto.Email);
         if (existing != null)
-            throw new Exception("Email already exists");
+            throw new BadRequestException("Email already exists");
 
         var user = new User
         {
@@ -37,12 +39,12 @@ public class AuthService
         var user = await _repo.GetByEmailAsync(dto.Email);
 
         if (user == null)
-            throw new Exception("Invalid email");
+            throw new UnauthorizedException("Invalid email!");
 
         var isValid = _passwordService.Verify(dto.Password, user.PasswordHash);
 
         if (!isValid)
-            throw new Exception("Invalid password");
+            throw new UnauthorizedException("Invalid password!");
 
         return "Login successful";
     }

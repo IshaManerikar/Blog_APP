@@ -1,3 +1,4 @@
+using BlogApp.API.Middlewares;
 using BlogApp.Application.Interfaces;
 using BlogApp.Application.Services;
 using BlogApp.Infrastructure.Data;
@@ -31,9 +32,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
